@@ -12,7 +12,7 @@ chatIds = []
 
 bot = telegram.Bot(token)
 
-bot.deleteWebhook()
+# bot.deleteWebhook()
 
 def image_to_data_url(filename):
     ext = filename.split('.')[-1]
