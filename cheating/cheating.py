@@ -8,7 +8,7 @@ api_id = '1569056'
 api_hash = 'c3defffabfb1cd518070ba9d16bc46f7'
 token = '1342187492:AAE0AhND59AsKuS7RQqTT3vJ0wyrNOkmGrA'
 
-chatIds = []
+chatId = -494212497
 
 bot = telegram.Bot(token)
 
@@ -22,8 +22,8 @@ def image_to_data_url(filename):
     return prefix + base64.b64encode(img).decode('utf-8')
 
 if bot.get_updates():
-    updates = bot.get_updates()[-1].message.chat_id
-    chatIds.append(updates)
+    if bot.get_updates()[-1].message.chat_id:
+        chatId = bot.get_updates()[-1].message.chat_id
 
 class Watcher:
     DIRECTORY_TO_WATCH = "../"
@@ -53,14 +53,12 @@ class Handler(FileSystemEventHandler):
             return None
 
         elif event.event_type == 'created':
-            
-            print(event.src_path)
-            for i in chatIds:
+            try:
+                time.sleep(1)
+                bot.send_photo(chat_id=chatId, photo=open(event.src_path, 'rb'))
                 print("sended")
-                try:
-                    bot.send_photo(chat_id=i, photo=open(event.src_path, 'rb'))
-                except:
-                    print("failed")
+            except:
+                print("failed")
 
 
 
