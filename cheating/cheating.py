@@ -12,6 +12,8 @@ chatIds = []
 
 bot = telegram.Bot(token)
 
+bot.deleteWebhook()
+
 def image_to_data_url(filename):
     ext = filename.split('.')[-1]
     prefix = f'data:image/{ext};base64,'
