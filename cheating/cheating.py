@@ -22,10 +22,8 @@ def image_to_data_url(filename):
     return prefix + base64.b64encode(img).decode('utf-8')
 
 if bot.get_updates():
-    updates = bot.get_updates()
-    for i in updates:
-        if i.message.chat_id not in chatIds:
-            chatIds.append(i.message.chat_id)
+    updates = bot.get_updates()[-1].message.chat_id
+    chatIds.append(updates)
 
 class Watcher:
     DIRECTORY_TO_WATCH = "../"
